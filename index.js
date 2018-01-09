@@ -35,7 +35,7 @@ function resolveValue(value, variables, result, decl) {
   const matches = balanced("(", ")", value.substring(start))
 
   if (!matches) {
-    throw decl.error(`missing closing ')' in the value '${value}'`)
+    throw decl.error("missing closing ')' in the value '" + value + "'")
   }
 
   if (matches.body === "") {
@@ -49,7 +49,7 @@ function resolveValue(value, variables, result, decl) {
     if (!variable && !fallback) {
       if (globalOpts.warnings) {
         const errorStr =
-          `variable '${name}' is undefined and used without a fallback`
+          "variable '" + name + "' is undefined and used without a fallback"
 
         if (globalOpts.noValueNotifications === "error") {
           throw decl.error(errorStr, {word: name})
@@ -187,10 +187,7 @@ export default postcss.plugin("postcss-custom-properties", (options = {}) => {
             prop.indexOf(VAR_PROP_IDENTIFIER) === 0
           ) {
             result.warn(
-              "Custom property ignored: not scoped to the top-level :root " +
-              `element (${rule.selectors} { ... ${prop}: ... })` +
-              (rule.parent.type !== "root" ? ", in " + rule.parent.type : ""),
-              {node: decl}
+              "Custom property ignored: not scoped to the top-level :root"
             )
           }
         })
